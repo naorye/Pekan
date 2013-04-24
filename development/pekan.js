@@ -15,7 +15,7 @@ var app = {
     evaluateContent: function(content) {
         return (new Function('with(this) { return ' + content + ' }')).call(this);
     },
-    readJsFile: function (filePath) {
+    resolveModule: function (filePath) {
         console.log('Fetching ' + filePath + ' with depth ' + this.readDepth);
         if (!fs.existsSync(filePath)) {
             console.log('JS File ' + filePath + ' is not exists.');
@@ -63,7 +63,7 @@ var app = {
                 return false;
             } else {
                 this.dependenciesRegistrar.registerLoading(filePath);
-                var evalResult = this.readJsFile(filePath);
+                var evalResult = this.resolveModule(filePath);
                 if (!evalResult) {
                     return false;
                 }
@@ -153,7 +153,7 @@ var app = {
         this.dependenciesRegistrar = new DependenciesRegistrar();
         this.writer = new ConcatenateWriter(this.buildObj.getJSOutPath());
 
-        this.readJsFile(this.buildObj.getJSInPath());
+        this.resolveModule(this.buildObj.getJSInPath());
         this.writer.close();
     }
 };
