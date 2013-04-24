@@ -1,0 +1,19 @@
+<table class="list-table">
+	<thead>
+		<tr>
+			<th>Image</th>
+			<th>Description</th>
+		</tr>
+	</thead>
+	<tbody>
+	<% _.each(products, function(product) { %>
+		<tr>
+			<td><img alt="" src="<%= product.thumbnail %>" class="img-polaroid"/></td>
+			<td>
+				<h4><a target="_blank" href="<%= product.link %>"><%= product.title %></a></h4>
+				<p><%= product.description %></p>
+			</td>
+		</tr>
+	<% }); %>
+	</tbody>
+</table>

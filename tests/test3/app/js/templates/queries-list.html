@@ -1,0 +1,12 @@
+<h2>Queries history:</h2>
+<ul>
+	<% _.each(queries, function(query) { %>
+		<li>
+			<a	href="javascript:void(0);"
+				data-source="<%= query.sourceId %>"
+				data-term="<%= query.term %>">
+				<%= query.sourceId %> / <%= query.term %>
+			</a>
+		</li>
+	<% }); %>
+</ul>

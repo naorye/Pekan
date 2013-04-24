@@ -1,0 +1,139 @@
+html, body { height:100%; }
+body { padding: 0; margin: 0; font-family: "Helvetica Neue",Helvetica,Arial,sans-serif; font-size: 14px;  color: #333333; }
+header { height: 37px; }
+nav { height: 37px; width: 100%; background-color: #2D2D2D; position: fixed; top: 0; }
+a { color: #0088CC; text-decoration: none; }
+a:hover { color: #005580; text-decoration: underline; }
+a:hover, a:active { outline: 0 none; }
+
+.search-input { margin: 9px auto auto 170px; width: 315px; border: 0 none; color: #2D2D2D; padding: 2px; }
+.search-button { border: none; padding: 1px; }
+.search-button:active { background-color: #2D2D2D; color: #EDEDED; }
+.source-select { margin-top: 9px; width: 200px; border: 0 none; color: #2D2D2D; padding: 1px; }
+.side-bar { width: 280px; height: 100%; background-color: #EDEDED; border-right: solid 1px #DDDDDD; position: fixed; left: 0; }
+.content { margin-left: 281px; }
+.loading { background-image: url(../imgs/loading.gif); height: 32px; width: 32px; }
+.block-box { display: inline-block; vertical-align: top; }
+.img-polaroid { background-color: #FFFFFF; border: 1px solid rgba(0, 0, 0, 0.2); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); padding: 4px; }
+.spacious { margin: 20px; text-align: center;}
+
+.list-table { margin-bottom: 20px; width: 100%; background-color: transparent; border-collapse: collapse; border-spacing: 0; }
+.list-table th, .list-table td { border-top: 1px solid #DDDDDD; line-height: 20px; padding: 8px; text-align: left; vertical-align: top; }
+.list-table tbody tr:hover td { background-color: #F5F5F5; }
+.list-table thead tr:first-child th { border-top: 0 none; }
+
+
+/* This is the default styling for all Tooltipsters: */
+.tooltip-message { background: #000; /* <- for IE */ background: rgba(0,0,0,0.9); color: #fff; font-family: Arial, sans-serif;
+	font-size: 12px; line-height: 12px; position: absolute; padding: 10px; border-radius: 2px; text-align: center;  z-index: 9999999;
+	pointer-events: none; width: auto; overflow: visible; }
+
+/* When you want to create a second class for your Tooltipster messages, copy (or modify) this template and add your style to it. Don't forget to refer to it in your Tooltipster settings (tooltipClass: '.my-custom-theme') */
+.my-custom-theme { position: absolute; text-align: center;  z-index: 9999999;  pointer-events: none; width: auto; }
+
+/* Add a slight border radius to all images inside the Tooltipsters */
+.tooltip-message img { border-radius: 2px; }
+
+/* These next classes handle the styles for the little arrow attached to the tooltip. If you need to change the color of the arrow to match a custom Tooltipster theme, set it in your Tooltipster settings (arrowColor: '#yourcolor') */
+.tooltip-arrow { display: block;	text-align: center; font-size: 12px; line-height: 12px; width: 100%; height: 5px; position: absolute;
+	left: 0px; z-index: -1; }
+	
+.tooltip-arrow-top { bottom: -3px; margin: 0 auto; text-align: center; }
+.tooltip-arrow-top-right { bottom: -3px; margin-left: -10px; text-align: right; }
+.tooltip-arrow-top-left { bottom: -3px; margin-left: 10px; text-align: left; }
+.tooltip-arrow-bottom { top: -10px; margin: 0 auto; text-align: center; }
+.tooltip-arrow-bottom-right { top: -10px; margin-left: -10px; text-align: right; }
+.tooltip-arrow-bottom-left { top: -10px; margin-left: 10px; text-align: left; }
+.tooltip-arrow-left { top: 0px; right: -18px; margin: 0 auto; text-align: right; }
+.tooltip-arrow-right { top: 0px; left: -8px; margin: 0 auto; text-align: left; }
+
+/* Some styling to enable the slide animation */
+.tooltip-slide { height: 0px; position: absolute; width: auto; z-index: 9999999; overflow: hidden; }
+
+
+/*
+
+
+
+
+
+
+
+
+.image-container {
+	position: relative;
+	padding:5px;
+	margin: 5px;
+	width: auto !important;
+    border: dashed 1px black;    
+}
+
+.image-container p {
+	white-space: nowrap;
+	width: 100%;
+	height: 20px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	text-align: center;
+	font-size: 12px;
+	color: white;
+	background-color: black;
+	opacity: 0.8;
+}
+
+.search {
+	clear: both;
+}
+
+.grid {
+	float: left;
+	width: 80%;
+}
+
+.term-history {
+	float: right;
+	width: 20%;
+}
+
+.term-history h2 {
+  font: 700 20px/1.5 Helvetica, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.term-history ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+ 
+.term-history li {
+  font: 100 20px/1.8 Helvetica, Verdana, sans-serif;
+  border-bottom: 1px solid #ccc;
+}
+ 
+.term-history li:last-child {
+  border: none;
+}
+ 
+.term-history li a {
+  text-decoration: none;
+  color: #000;
+  display: block;
+  width: 100%;
+ 
+  -webkit-transition: font-size 0.3s ease, background-color 0.3s ease;
+  -moz-transition: font-size 0.3s ease, background-color 0.3s ease;
+  -o-transition: font-size 0.3s ease, background-color 0.3s ease;
+  -ms-transition: font-size 0.3s ease, background-color 0.3s ease;
+  transition: font-size 0.3s ease, background-color 0.3s ease;
+}
+ 
+.term-history li a:hover {
+  font-size: 30px;
+  background: #f6f6f6;
+}
+*/

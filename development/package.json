@@ -1,0 +1,8 @@
+{
+    "name": "pekan",
+    "version": "0.1.0",
+    "author": "Naor Ye <naorye@gmail.com>",
+    "dependencies": {
+	   "node-minify": "0.7.x"
+    }
+}

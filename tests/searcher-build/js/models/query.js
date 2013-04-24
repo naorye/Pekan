@@ -1,0 +1,1 @@
+define(["Underscore","Backbone"],function(e,t){var n=t.Model.extend({defaults:{term:"",sourceId:""}});return n});

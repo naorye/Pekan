@@ -1,0 +1,1 @@
+define(["Backbone","sources/google-search-api-for-shopping/models/product"],function(e,t){var n=e.Collection.extend({model:t,url:"https://www.googleapis.com/shopping/search/v1/public/products",parse:function(e){return e.items}});return n});

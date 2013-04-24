@@ -1,0 +1,1 @@
+define(["Backbone"],function(e){var t=e.Model.extend({defaults:{src:"",title:"none",alt:""},parse:function(e){return{title:e.title,src:e.image.square,alt:e.image.alt}}});return t});

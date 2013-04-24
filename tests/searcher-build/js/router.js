@@ -1,0 +1,1 @@
+define(["Backbone","app"],function(e,t){var n=e.Router.extend({routes:{"search/:sourceId/:term":"searchImages"},searchImages:function(e,n){t.appQuery.set({sourceId:e,term:n})}});return n});

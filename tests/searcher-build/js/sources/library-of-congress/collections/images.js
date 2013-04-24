@@ -1,0 +1,1 @@
+define(["Backbone","sources/library-of-congress/models/image"],function(e,t){var n=e.Collection.extend({model:t,url:"http://loc.gov/pictures/search/",parse:function(e){return e.results}});return n});
