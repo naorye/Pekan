@@ -12,11 +12,7 @@ var app = {
         fs.appendFileSync(this.buildObj.getJSOutPath(), '})();');
     },
     evaluateContent: function(content) {
-        var scope = {};
-        for (var key in this) {
-            scope[key] = this[key];
-        }
-        return (new Function('with(this) { return ' + content + ' }')).call(scope);
+        return (new Function('with(this) { return ' + content + ' }')).call(this);
     },
     readJsFile: function (filePath) {
         console.log('Fetching ' + filePath + ' with depth ' + this.readDepth);
