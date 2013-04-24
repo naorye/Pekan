@@ -2,14 +2,15 @@ var fs = require('fs'),
     ArgumentsParser = require('./utils/arguments-parser'),
     VariablesNamesGenerator = require('./utils/variables-names-generator'),
     DependenciesRegistrar = require('./utils/dependencies-registrar');
-    BuildObj = require('./utils/build-obj');
+    BuildObj = require('./utils/build-obj'),
+    ConcatenateWriter = require('./utils/concatenate-writer');
 
 var app = {
     startFunctionWrap: function() {
-        fs.appendFileSync(this.buildObj.getJSOutPath(), '(function() {' + '\n');
+        this.writer.appendLine('(function() {');
     },
     endFunctionWrap: function() {
-        fs.appendFileSync(this.buildObj.getJSOutPath(), '})();');
+        this.writer.appendLine('})();');
     },
     evaluateContent: function(content) {
         return (new Function('with(this) { return ' + content + ' }')).call(this);
@@ -40,7 +41,9 @@ var app = {
         }
 
         if (evalResult.content !== null) {
-            fs.appendFileSync(this.buildObj.getJSOutPath(), '\t' + evalResult.content.replace(/\r\n|\r|\n/g,'\r\n\t') + '\n');
+            this.writer.incIndent();
+            this.writer.appendLine(evalResult.content);
+            this.writer.decIndent();
         }
 
         this.readDepth--;
@@ -148,8 +151,10 @@ var app = {
         this.readDepth = 0;
         this.namesGenerator = new VariablesNamesGenerator('pekan');
         this.dependenciesRegistrar = new DependenciesRegistrar();
+        this.writer = new ConcatenateWriter(this.buildObj.getJSOutPath());
 
         this.readJsFile(this.buildObj.getJSInPath());
+        this.writer.close();
     }
 };
 
