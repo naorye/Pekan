@@ -6,12 +6,6 @@ var fs = require('fs'),
     ConcatenateWriter = require('./utils/concatenate-writer');
 
 var app = {
-    startFunctionWrap: function() {
-        this.writer.appendLine('(function() {');
-    },
-    endFunctionWrap: function() {
-        this.writer.appendLine('})();');
-    },
     evaluateContent: function(content) {
         return (new Function('with(this) { return ' + content + ' }')).call(this);
     },
@@ -22,9 +16,6 @@ var app = {
             return false;
         }
 
-        if (this.readDepth === 0) {
-            this.startFunctionWrap();
-        }
         this.readDepth++;
 
         var content = fs.readFileSync(filePath, 'utf8'),
@@ -47,9 +38,6 @@ var app = {
         }
 
         this.readDepth--;
-        if (this.readDepth === 0) {
-            this.endFunctionWrap();
-        }
         return evalResult;
     },
     fetchJSDependencies: function(dependencies) {
@@ -151,7 +139,9 @@ var app = {
         this.readDepth = 0;
         this.namesGenerator = new VariablesNamesGenerator('pekan');
         this.dependenciesRegistrar = new DependenciesRegistrar();
-        this.writer = new ConcatenateWriter(this.buildObj.getJSOutPath());
+        this.writer = new ConcatenateWriter(this.buildObj.getJSOutPath(), {
+            functionWrap: true
+        });
 
         this.resolveModule(this.buildObj.getJSInPath());
         this.writer.close();
