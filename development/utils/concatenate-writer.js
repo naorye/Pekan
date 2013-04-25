@@ -2,7 +2,7 @@ var fs = require('fs');
 
 var ConcatenateWriter = function(path, options) {
     this.options = options || {};
-    this.options.functionWrap = this.options.functionWrap !== true;
+    this.options.functionWrap = this.options.functionWrap !== false;
 
     for (var option in this.defaults) {
         if (!(option in this.options)) {
@@ -12,7 +12,7 @@ var ConcatenateWriter = function(path, options) {
 
     this.path = path;
     this.indent = 0;
-    this.text = '';
+    this.lines = [];
 };
 ConcatenateWriter.prototype.defaults = {
     functionWrap: true
@@ -30,16 +30,14 @@ ConcatenateWriter.prototype.formatLine = function(str) {
     for (var i = 0; i < this.indent; i++) {
         indentation += '\t';
     }
-    if (this.text !== '') {
-        this.text += '\n';
-    }
+
     return indentation + str.replace(/\r\n|\r|\n/g,'\r\n' + indentation);
 };
 ConcatenateWriter.prototype.appendLine = function(str) {
-    this.text += this.formatLine(str);
+    this.lines.push(this.formatLine(str));
 };
 ConcatenateWriter.prototype.prependLine = function(str) {
-    this.text = this.formatLine(str) + this.text;
+    this.lines.splice(0, 0, this.formatLine(str));
 };
 ConcatenateWriter.prototype.close = function() {
     if (this.options.functionWrap) {
@@ -47,7 +45,7 @@ ConcatenateWriter.prototype.close = function() {
         this.appendLine('})();');
     }
 
-    fs.appendFileSync(this.path, this.text);
+    fs.appendFileSync(this.path, this.lines.join('\n'));
 };
 
 module.exports = ConcatenateWriter;
