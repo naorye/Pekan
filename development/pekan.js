@@ -137,7 +137,7 @@ var app = {
         }
 
         this.readDepth = 0;
-        this.namesGenerator = new VariablesNamesGenerator('pekan');
+        this.namesGenerator = new VariablesNamesGenerator({}, 'pekan');
         this.dependenciesRegistrar = new DependenciesRegistrar();
         this.writer = new ConcatenateWriter(this.buildObj.getJSOutPath(), {
             functionWrap: true
