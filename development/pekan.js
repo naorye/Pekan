@@ -3,7 +3,8 @@ var fs = require('fs'),
     VariablesNamesGenerator = require('./utils/variables-names-generator'),
     DependenciesRegistrar = require('./utils/dependencies-registrar');
     BuildObj = require('./utils/build-obj'),
-    ConcatenateWriter = require('./utils/concatenate-writer');
+    ConcatenateWriter = require('./utils/concatenate-writer'),
+    compressor = require('node-minify');
 
 var app = {
     evaluateContent: function(content) {
@@ -145,6 +146,9 @@ var app = {
 
         this.resolveModule(this.buildObj.getJSInPath());
         this.writer.close();
+        new compressor.minify({
+            fileIn: this.config.getJSOutPath(),
+            fileOut: this.config.getJSOutPath(),
     }
 };
 
