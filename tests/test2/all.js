@@ -1,12 +1,1 @@
-(function() {
-	var var0 = (function () {
-	    return [1,2,3];
-	}).apply(this, []);
-	var var1 = (function (b) {
-	    var a = function() {
-	        return b;
-	    };
-	
-	    return a;
-	}).apply(this, [var0]);
-})();
+(function(){var n=function(){return[1,2,3]}.apply(this,[]);var r=function(n){var r=function(){return n};return r}.apply(this,[n])})();
